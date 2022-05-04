@@ -12,6 +12,7 @@ using namespace std;
 class AgentMenu {
 private:
     AgentList* agentListRef;
+    int* changesMadeRef;
     static void enterToContinue();
     //add an agent
     void addAgent();
@@ -32,7 +33,7 @@ private:
     //main menu
     void mainAgentMenu();
 public:
-    explicit AgentMenu(AgentList* agentList);
+    explicit AgentMenu(AgentList* agentList, int *changesMade);
 };
 
 enum{

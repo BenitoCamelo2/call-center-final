@@ -10,7 +10,8 @@
 #error "SO no soportado para limpiar pantalla"
 #endif
 
-AgentMenu::AgentMenu(AgentList* agentList): agentListRef(agentList) {
+AgentMenu::AgentMenu(AgentList* agentList, int *changesMade): agentListRef(agentList) {
+    changesMadeRef = changesMade;
     mainAgentMenu();
 }
 
@@ -108,7 +109,7 @@ void AgentMenu::addAgent() {
     cin >> option;
 
     if(option == 's' || option == 'S'){
-        new ClientMenu(tempAgent.getClientList());
+        new ClientMenu(tempAgent.getClientList(), changesMadeRef);
     }
 
     tempAgent.setData(codeSTR, name, startTime, endTime, extension, extraHours, specialty);
@@ -304,7 +305,7 @@ void AgentMenu::modifyAgent() {
                 break;
             }
             case MODIFY_CLIENTS: {
-                new ClientMenu(tempAgent.getClientList());
+                new ClientMenu(tempAgent.getClientList(), changesMadeRef);
                 break;
             }
             case EXIT_MODIFY: {
@@ -636,7 +637,7 @@ void AgentMenu::printAgents(char clients, int option) {
 
         }
     }
-    if(option == 'n' || option == 'N'){
+    if(clients == 'n' || clients == 'N'){
         cout << endl;
         cout << "1. Ordenar agentes" << endl;
         cout << "2. Filtrar resultados" << endl;
@@ -653,10 +654,14 @@ void AgentMenu::printAgents(char clients, int option) {
                 switch(sort){
                     case 1: {
                         agentListRef->sortByName();
+                        *changesMadeRef = true;
+                        printAgents('n', 0);
                         break;
                     }
                     case 2: {
                         agentListRef->sortBySpecialty();
+                        *changesMadeRef = true;
+                        printAgents('n', 0);
                         break;
                     }
                     default: {
@@ -732,17 +737,17 @@ void AgentMenu::mainAgentMenu() {
         //user chooses an option
             case ADD_AGENT: {
                 addAgent();
-                saveChanges = true;
+                *changesMadeRef = true;
                 break;
             }
             case DELETE_AGENT: {
                 deleteAgent();
-                saveChanges = true;
+                *changesMadeRef = true;
                 break;
             }
             case MODIFY_AGENT: {
                 modifyAgent();
-                saveChanges = true;
+                *changesMadeRef = true;
                 break;
             }
             case SEARCH_AGENT: {

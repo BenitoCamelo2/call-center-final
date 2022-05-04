@@ -11,6 +11,8 @@ MainMenu::MainMenu() {
 void MainMenu::menu() {
 
     bool end = false;
+    int inicialize = 0;
+    int* changes = &inicialize;
     int option;
     do{
 
@@ -24,7 +26,7 @@ void MainMenu::menu() {
         cin >> option;
         switch(option){
             case AGENT_MENU: {
-                new AgentMenu(agentList);
+                new AgentMenu(agentList, changes);
                 break;
             }
             case CLIENT_MENU: {
@@ -57,14 +59,23 @@ void MainMenu::menu() {
                 }
                 tempAgent = agentList->retrieve(temp);
 
-                new ClientMenu(tempAgent.getClientList());
+                new ClientMenu(tempAgent.getClientList(), changes);
                 break;
             }
             case SAVE_CHANGES: {
                 agentList->writeToDisk(AGENT_FILE_NAME);
+                *changes = 0;
                 break;
             }
             case EXIT: {
+                if(*changes){
+                    char options;
+                    cout << "Tiene cambios no guardados, guste guardarlos? (S/N)";
+                    cin >> options;
+                    if(options == 's' || options == 'S'){
+                        agentList->writeToDisk(AGENT_FILE_NAME);
+                    }
+                }
                 end = true;
             }
         }

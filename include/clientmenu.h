@@ -11,6 +11,7 @@ using namespace std;
 class ClientMenu {
 private:
     ClientList* clientListRef;
+    int* changesMadeRef;
     //pause, click a key to unpause
     static void enterToContinue();
     //adds a client to the list
@@ -28,7 +29,7 @@ private:
     //main menu
     void mainClientMenu();
 public:
-    explicit ClientMenu(ClientList* clientList);
+    explicit ClientMenu(ClientList* clientList, int* changesMade);
 };
 
 enum{

@@ -10,7 +10,8 @@
 #error "SO no soportado para limpiar pantalla"
 #endif
 
-ClientMenu::ClientMenu(ClientList *clientList): clientListRef(clientList) {
+ClientMenu::ClientMenu(ClientList *clientList, int *changesMade): clientListRef(clientList) {
+    changesMadeRef = changesMade;
     //inicializes main menu
     mainClientMenu();
 }
@@ -455,14 +456,17 @@ void ClientMenu::mainClientMenu() {
         switch(opc){
             case ADD_CLIENT: {
                 addClient();
+                *changesMadeRef = true;
                 break;
             }
             case DELETE_CLIENT: {
                 deleteClient();
+                *changesMadeRef = true;
                 break;
             }
             case MODIFY_CLIENT: {
                 modifyClient();
+                *changesMadeRef = true;
                 break;
             }
             case SEARCH_CLIENT: {
