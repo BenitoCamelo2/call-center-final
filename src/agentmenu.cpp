@@ -728,9 +728,10 @@ void AgentMenu::mainAgentMenu() {
         cout << "2. Eliminar agente" << endl;
         cout << "3. Modificar agente" << endl;
         cout << "4. Buscar agente" << endl;
-        cout << "5. Mostrar los agentes" << endl;
-        cout << "6. Eliminar TODOS los agentes" << endl;
-        cout << "7. Salir" << endl;
+        cout << "5. Organizar agentes" << endl;
+        cout << "6. Mostrar los agentes" << endl;
+        cout << "7. Eliminar TODOS los agentes" << endl;
+        cout << "8. Salir" << endl;
         cout << "Option: ";
         cin >> option;
         switch(option){
@@ -752,6 +753,10 @@ void AgentMenu::mainAgentMenu() {
             }
             case SEARCH_AGENT: {
                 searchAgent();
+                break;
+            }
+            case ORGANIZE_AGENTS: {
+                sortAgents();
                 break;
             }
             case SHOW_AGENTS: {
