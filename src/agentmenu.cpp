@@ -637,58 +637,57 @@ void AgentMenu::printAgents(char clients, int option) {
 
         }
     }
-    if(clients == 'n' || clients == 'N'){
-        cout << endl;
-        cout << "1. Ordenar agentes" << endl;
-        cout << "2. Filtrar resultados" << endl;
-        cout << "3. Salir" << endl;
-        cout << "Opcion: ";
-        cin >> secondOption;
-        switch(secondOption){
-            case 1: {
-                cout << "1. Nombre" << endl;
-                cout << "2. Especialidad" << endl;
-                cout << "3. Cancelar" << endl;
-                cout << "Opcion: ";
-                cin >> sort;
-                switch(sort){
-                    case 1: {
-                        agentListRef->sortByName();
-                        *changesMadeRef = true;
-                        printAgents('n', 0);
-                        break;
-                    }
-                    case 2: {
-                        agentListRef->sortBySpecialty();
-                        *changesMadeRef = true;
-                        printAgents('n', 0);
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
+    cout << endl;
+    cout << "1. Ordenar agentes" << endl;
+    cout << "2. Filtrar resultados" << endl;
+    cout << "3. Salir" << endl;
+    cout << "Opcion: ";
+    cin >> secondOption;
+    switch(secondOption){
+        case 1: {
+            cout << "1. Nombre" << endl;
+            cout << "2. Especialidad" << endl;
+            cout << "3. Cancelar" << endl;
+            cout << "Opcion: ";
+            cin >> sort;
+            switch(sort){
+                case 1: {
+                    agentListRef->sortByName();
+                    *changesMadeRef = true;
+                    printAgents('n', 0);
+                    break;
                 }
-                break;
-            }
-            case 2: {
-                cout << "1. Escritorio" << endl;
-                cout << "2. Impresoras" << endl;
-                cout << "3. Linux" << endl;
-                cout << "4. Portatiles" << endl;
-                cout << "5. Redes" << endl;
-                cout << "6. Servidores" << endl;
-                cout << "0. Salir" << endl;
-                cout << "Opcion: ";
-                cin >> filter;
-                if(filter == 0){
-                    return;
-                } else {
-                    printAgents('n', filter);
+                case 2: {
+                    agentListRef->sortBySpecialty();
+                    *changesMadeRef = true;
+                    printAgents('n', 0);
+                    break;
                 }
-                break;
+                default: {
+                    break;
+                }
             }
+            break;
+        }
+        case 2: {
+            cout << "1. Escritorio" << endl;
+            cout << "2. Impresoras" << endl;
+            cout << "3. Linux" << endl;
+            cout << "4. Portatiles" << endl;
+            cout << "5. Redes" << endl;
+            cout << "6. Servidores" << endl;
+            cout << "0. Salir" << endl;
+            cout << "Opcion: ";
+            cin >> filter;
+            if(filter == 0){
+                return;
+            } else {
+                printAgents(clients, filter);
+            }
+            break;
         }
     }
+
 
 }
 
